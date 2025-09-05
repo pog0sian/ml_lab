@@ -1,5 +1,7 @@
 import numpy as np
 
+# 1.1
+
 arr = np.array([1, 7, 13, 105])
 
 print("Размер памяти (байт):", arr.nbytes)

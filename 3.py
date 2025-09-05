@@ -1,5 +1,7 @@
 import numpy as np
 
+# 3
+
 print("Введите коэффициенты a11, a12 и b1 для уравнения a11*x + a12*y = b1:")
 a11, a12, b1 = map(float, input().split())
 
