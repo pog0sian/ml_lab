@@ -1,18 +1,17 @@
+import matplotlib.pyplot as plt
 import numpy as np
 
-print("Введите коэффициенты a11, a12 и b1 для уравнения a11*x + a12*y = b1:")
-a11, a12, b1 = map(float, input().split())
+# 3
 
-print("Введите коэффициенты a21, a22 и b2 для уравнения a21*x + a22*y = b2:")
-a21, a22, b2 = map(float, input().split())
+x = np.linspace(-3, 5, 400)
+y = x * x - x - 6
 
-A = np.array([[a11, a12], [a21, a22]])
-B = np.array([b1, b2])
-
-det = np.linalg.det(A)
-
-if det == 0:
-    print("Система уравнений не имеет решения или имеет бесконечное множество решений (определитель равен 0).")
-else:
-    solution = np.linalg.solve(A, B)
-    print(f"Решение системы уравнений: x = {solution[0]}, y = {solution[1]}")
+plt.plot(x, y, label='y = x^2 - x - 6')
+plt.axhline(0, color='black', linewidth=0.8)  # ось x
+plt.axvline(0, color='grey', linewidth=0.5, linestyle='--')  # ось y
+plt.title('График функции y = x^2 - x - 6')
+plt.xlabel('x')
+plt.ylabel('y')
+plt.grid(True)
+plt.legend()
+plt.show()

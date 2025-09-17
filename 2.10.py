@@ -1,5 +1,7 @@
 import numpy as np
 
+# 2.10
+
 coeffs_a = [1, -4, 7]
 roots_a = np.roots(coeffs_a)
 print("Корни уравнения x^2 - 4x + 7:", roots_a)

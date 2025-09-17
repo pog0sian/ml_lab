@@ -1,5 +1,7 @@
 import numpy as np
 
+# 1.7
+
 arr = np.zeros((10, 10), dtype=int)
 arr[0, :] = 1
 arr[-1, :] = 1
