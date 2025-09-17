@@ -1,16 +1,26 @@
-import numpy as np
+import matplotlib.pyplot as plt
+from matplotlib.ticker import MultipleLocator
 
 # 1.1
 
-arr = np.array([1, 7, 13, 105])
+x = range(1, 50)
+y = [3 * i for i in x]
 
-print("Размер памяти (байт):", arr.nbytes)
+plt.plot(x, y, color='blue')
 
-np.savetxt('array.txt', arr, fmt='%d')
-np.save('array.npy', arr)
+plt.tick_params(direction="in", top=True, right=True)
 
-arr_txt = np.loadtxt('array.txt', dtype=int)
-print("Массив из текстового файла:", arr_txt)
+ax = plt.gca()
+ax.xaxis.set_major_locator(MultipleLocator(10))
+ax.yaxis.set_major_locator(MultipleLocator(20))
 
-arr_npy = np.load('array.npy')
-print("Массив из бинарного файла:", arr_npy)
+plt.xlim(0, 50)
+plt.ylim(0, 160)
+
+plt.title('Draw a line.')
+plt.xlabel('x - axis')
+plt.ylabel('y - axis')
+
+plt.margins(0.05)
+
+plt.show()
