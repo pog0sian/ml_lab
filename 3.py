@@ -1,17 +1,30 @@
-import matplotlib.pyplot as plt
-import numpy as np
+import pandas as pd
 
-# 3
+# 1.1
 
-x = np.linspace(-3, 5, 400)
-y = x * x - x - 6
+df = pd.read_csv('la-crimes-sample.csv')
 
-plt.plot(x, y, label='y = x^2 - x - 6')
-plt.axhline(0, color='black', linewidth=0.8)  # ось x
-plt.axvline(0, color='grey', linewidth=0.5, linestyle='--')  # ось y
-plt.title('График функции y = x^2 - x - 6')
-plt.xlabel('x')
-plt.ylabel('y')
-plt.grid(True)
-plt.legend()
-plt.show()
+# 1.2
+
+print(df.shape[0], df.shape[1])
+
+# 1.3
+
+print(df.columns)
+
+# 1.4
+
+print(df.nunique())
+
+# 1.5
+
+print(df.isnull().sum().sum())
+
+# 1.6
+
+f = (df['Victim Sex'] == 'F').sum()
+m = (df['Victim Sex'] == 'M').sum()
+if f > m:
+    print('Жертв среди женщин больше, чем среди мужчин')
+else:
+    print('Жертв среди мужчин больше, чем среди женщин')

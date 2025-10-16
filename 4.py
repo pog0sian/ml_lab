@@ -1,24 +1,47 @@
-import matplotlib.pyplot as plt
-import numpy as np
+import pandas as pd
 
-def y(x):
+# 1.1
 
-    base = 1 + np.tan(1 / (1 + np.sin(x) ** 2))
+polit = pd.read_csv('polit.csv', decimal=',')
+polit = polit.dropna(how='all')
 
-    argument = (x ** 2 + 1) * np.exp(-np.abs(x) / 10)
+# 1.2
 
-    with np.errstate(invalid='ignore', divide='ignore'):
-        result = np.where((base > 0) & (argument > 0),
-                          np.log(argument) / np.log(base),
-                          np.nan)
-    return result
+print(polit[polit['fh09'] > 5])
 
-x = np.linspace(-7, 7, 1000)
-y_vals = y(x)
+# 1.3
 
-plt.plot(x, y_vals, color='blue')
-plt.title(r"$y(x) = \log_{1+\tan\left(\frac{1}{1+\sin^2 x}\right)}\left((x^2+1)e^{-\frac{|x|}{10}}\right)$")
-plt.xlabel('x')
-plt.ylabel('y(x)')
-plt.grid(True)
-plt.show()
+print(polit[(polit['afri'] == 1) & (polit['fparl08'] > 30)])
+
+# 1.4
+
+print(polit[((polit['afri'] == 1) | (polit['lati'] == 1)) & (polit['polity09'] >= 8)])
+
+# 1.5
+
+polit['corr_round'] = polit['corr0509'].round(2)
+print(polit[['ctry', 'corr_round', 'corr0509']])
+
+# 1.6
+
+def map_fh_status(x):
+    if x <= 2.5:
+        return 'free'
+    elif x <= 5.0:
+        return 'partly free'
+    else:
+        return 'not free'
+
+polit['fh_status'] = polit['fh09'].apply(map_fh_status)
+print(polit[['ctry', 'fh09', 'fh_status']])
+
+# 1.7
+
+gini_stats = polit.groupby('fh_status')['gini'].agg(min='min', mean='mean', max='max').reset_index()
+print(gini_stats)
+
+# 1.8
+
+for name, group in polit.groupby('fh_status'):
+    fname = f"polit_{name.replace(' ', '_')}.csv"
+    group.to_csv(fname, index=False)
