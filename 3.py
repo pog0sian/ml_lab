@@ -1,18 +1,30 @@
-import numpy as np
+import pandas as pd
 
-print("Введите коэффициенты a11, a12 и b1 для уравнения a11*x + a12*y = b1:")
-a11, a12, b1 = map(float, input().split())
+# 1.1
 
-print("Введите коэффициенты a21, a22 и b2 для уравнения a21*x + a22*y = b2:")
-a21, a22, b2 = map(float, input().split())
+df = pd.read_csv('la-crimes-sample.csv')
 
-A = np.array([[a11, a12], [a21, a22]])
-B = np.array([b1, b2])
+# 1.2
 
-det = np.linalg.det(A)
+print(df.shape[0], df.shape[1])
 
-if det == 0:
-    print("Система уравнений не имеет решения или имеет бесконечное множество решений (определитель равен 0).")
+# 1.3
+
+print(df.columns)
+
+# 1.4
+
+print(df.nunique())
+
+# 1.5
+
+print(df.isnull().sum().sum())
+
+# 1.6
+
+f = (df['Victim Sex'] == 'F').sum()
+m = (df['Victim Sex'] == 'M').sum()
+if f > m:
+    print('Жертв среди женщин больше, чем среди мужчин')
 else:
-    solution = np.linalg.solve(A, B)
-    print(f"Решение системы уравнений: x = {solution[0]}, y = {solution[1]}")
+    print('Жертв среди мужчин больше, чем среди женщин')

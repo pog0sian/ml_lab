@@ -1,5 +1,7 @@
 import numpy as np
 
+# 2.8
+
 arr1 = np.array(['Python', 'PHP'])
 arr2 = np.array(['Java', 'C++'])
 
